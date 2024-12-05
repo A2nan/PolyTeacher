@@ -6,6 +6,13 @@ from translator.models import Translation
 from translator.serializers import TranslationSerializer
 
 # Create your views here.
+class AllTranslation(APIView):
+    def get(self, request):
+
+        result = Translation.objects.all()
+        serialized_data = TranslationSerializer(result, many=True)
+
+        return Response(data=serialized_data.data, status=status.HTTP_200_OK)
 
 class FrenchSpanishTranslationViewSet(APIView):
 
